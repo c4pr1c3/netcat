@@ -1900,7 +1900,11 @@ recycle:
 
 /* If your shitbox doesn't have getopt, step into the nineties already. */
 /* optarg, optind = next-argv-component [i.e. flag arg]; optopt = last-char */
+#ifdef GAPING_SECURITY_HOLE
+   while ((x = getopt (argc, argv, "adg:G:hi:lLno:p:rs:tuvw:zxe:")) != EOF) {
+#else
    while ((x = getopt (argc, argv, "adg:G:hi:lLno:p:rs:tuvw:zx")) != EOF) {
+#endif
 /* Debug (("in go: x now %c, optarg %x optind %d", x, optarg, optind)) */
     switch (x) {
       case 'a':
@@ -2203,6 +2207,7 @@ static int helpme()
 {
   o_verbose = 1;
   holler ("NetCat for Windows v" VERSION " https://github.com/diegocr/netcat\n\
+  	forked by https://github.com/c4pr1c3/netcat\n\
 connect to somewhere:	nc [-options] hostname port[s] [ports] ... \n\
 listen for inbound:	nc -l -p port [options] [hostname] [port]\n\
 options:");
