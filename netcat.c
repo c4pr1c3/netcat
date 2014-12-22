@@ -328,7 +328,7 @@ int error;
    fake varargs -- need to do this way because we wind up calling through
    more levels of indirection than vanilla varargs can handle, and not all
    machines have vfprintf/vsyslog/whatever!  6 params oughta be enough. */
-static void holler (str, p1, p2, p3, p4, p5, p6)
+void holler (str, p1, p2, p3, p4, p5, p6)
   char * str;
   char * p1, * p2, * p3, * p4, * p5, * p6;
 {
@@ -492,6 +492,13 @@ static int comparehosts (poop, hp)
 #ifdef ANAL			
   if (strcmp (poop->name, hp->h_name) != 0) {		/* case-sensitive */
 #else
+/* fix netcat.obj : error LNK2019: 无法解析的外部符号 _strcasecmp，该符号在函数 _comparehosts 中被引用 */
+#ifdef _MSC_VER
+#define strcasecmp   stricmp
+#define strncasecmp  strnicmp 
+#endif
+/*fix netcat.obj end */
+
   if (strcasecmp (poop->name, hp->h_name) != 0) {	/* normal */
 #endif
     holler ("DNS fwd/rev mismatch: %s != %s", poop->name, hp->h_name);
@@ -1403,6 +1410,7 @@ static int readwrite (fd)
   int fd;
 #endif
 {
+  int a;
   register int rr;
   register unsigned char * zp;	/* stdin buf ptr */// changed to unsigned! [diegocr]
   register unsigned char * np;	/* net-in buf ptr */// changed to unsigned! [diegocr]
@@ -1649,7 +1657,8 @@ shovel:
 		++ptr;
 	}
 	if(o_esco && w32_stdout && (p2=(unsigned char *)strchr((const char *)np, 0x1b)) && p2 < end) {
-		ptr = np; int a = csbi.wAttributes;
+		ptr = np; 
+        a = csbi.wAttributes;
 		do {
 			unsigned int l = p2 - ptr, c;
 			if (l) {
