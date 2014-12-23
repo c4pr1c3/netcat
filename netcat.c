@@ -96,6 +96,7 @@
 # include <fcntl.h>
 # include <io.h>
 # include <conio.h>
+# include <windows.h>
 # include "getopt.h"
 # define sleep(_x)		Sleep((_x)*1000)
 # define EADDRINUSE		WSAEADDRINUSE
@@ -758,7 +759,13 @@ static void loadports (block, lo, hi)
 } /* loadports */
 
 #ifdef GAPING_SECURITY_HOLE
+#ifdef UNICODE
+#define MAX_CMD_LINE 256
+WCHAR pr00gie[MAX_CMD_LINE] = {0}; /* writable buffer for CreateProcessW() */
+#else
 char * pr00gie = NULL;			/* global ptr to -e arg */
+#endif
+
 #ifdef WIN32
 BOOL doexec(SOCKET  ClientSocket);  // this is in doexec.c
 #else
@@ -1912,7 +1919,11 @@ recycle:
 	o_alla++; break;
 #ifdef GAPING_SECURITY_HOLE
       case 'e':				/* prog to exec */
+#ifdef UNICODE
+	MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, optarg, lstrlenA(optarg), pr00gie, MAX_CMD_LINE);
+#else
 	pr00gie = optarg;
+#endif
 	break;
 #endif
 	        case 'L':				/* listen then cycle back to start instead of exiting */

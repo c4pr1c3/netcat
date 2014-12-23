@@ -15,7 +15,14 @@
 
 #define BUFFER_SIZE 200
 
+#ifdef UNICODE
+#ifndef MAX_CMD_LINE
+#define MAX_CMD_LINE 256
+#endif
+extern WCHAR pr00gie[MAX_CMD_LINE];
+#else
 extern char * pr00gie;
+#endif
 void holler(char * str, char * p1, char * p2, char * p3, char * p4, char * p5, char * p6);
 char smbuff[20];
 //
@@ -332,7 +339,7 @@ StartShell(
                     GetCurrentProcess(), &si.hStdError,
                     DUPLICATE_SAME_ACCESS, TRUE, 0);
 
-    if (CreateProcessA(NULL, pr00gie, NULL, NULL, TRUE, 0, NULL, NULL,
+    if (CreateProcess(NULL, pr00gie, NULL, NULL, TRUE, 0, NULL, NULL,
                       &si, &ProcessInformation)) 
     {
         ProcessHandle = ProcessInformation.hProcess;
