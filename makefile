@@ -12,8 +12,8 @@ lflags=kernel32.lib user32.lib wsock32.lib /nologo /subsystem:console /increment
 
 !else
 
-cflags=/Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D "GAPING_SECURITY_HOLE" /D "TELNET" /D "WIN32" /D "NDEBUG" /D "_CONSOLE" /D "_UNICODE" /D "UNICODE" /Gm- /EHsc /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fp"netcat.pch" /Fa"" /Fo"" /Fd"vc100.pdb" /Gd /analyze- /errorReport:queue  /c
-lflags= /INCREMENTAL:NO /NOLOGO "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib" "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib" /MANIFEST /ManifestFile:"netcat.exe.intermediate.manifest" /ALLOWISOLATION /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"netcat.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /TLBID:1 /DYNAMICBASE /NXCOMPAT /MACHINE:X86 /ERRORREPORT:QUEUE  /out:nc-e.exe
+cflags=/Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D "GAPING_SECURITY_HOLE" /D "TELNET" /D "WIN32" /D "NDEBUG" /D "_CONSOLE" /Gm- /EHsc /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fp"netcat.pch" /Fa"" /Fo"" /Fd"vc100.pdb" /Gd /analyze- /errorReport:queue  /c
+lflags=/INCREMENTAL:NO /NOLOGO "kernel32.lib" "user32.lib" "gdi32.lib" "winspool.lib" "comdlg32.lib" "advapi32.lib" "shell32.lib" "ole32.lib" "oleaut32.lib" "uuid.lib" "odbc32.lib" "odbccp32.lib" /MANIFEST /ManifestFile:"netcat.exe.intermediate.manifest" /ALLOWISOLATION /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"netcat.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /TLBID:1 /DYNAMICBASE /NXCOMPAT /MACHINE:X86 /ERRORREPORT:QUEUE  /out:nc-e.exe
 
 !endif
 

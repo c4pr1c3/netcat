@@ -332,7 +332,7 @@ StartShell(
                     GetCurrentProcess(), &si.hStdError,
                     DUPLICATE_SAME_ACCESS, TRUE, 0);
 
-    if (CreateProcess(NULL, pr00gie, NULL, NULL, TRUE, 0, NULL, NULL,
+    if (CreateProcessA(NULL, pr00gie, NULL, NULL, TRUE, 0, NULL, NULL,
                       &si, &ProcessInformation)) 
     {
         ProcessHandle = ProcessInformation.hProcess;
